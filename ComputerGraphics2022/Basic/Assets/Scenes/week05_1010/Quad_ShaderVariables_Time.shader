@@ -27,7 +27,7 @@ Shader "My/Quad_ShaderVariables_Time"
 
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
-            fixed4 c = tex2D(_MainTex, IN.uv_MainTex + _Time.y);
+            fixed4 c = tex2D(_MainTex, IN.uv_MainTex - _Time.y);
             o.Emission = c.rgb;
             o.Alpha = c.a;
         }
