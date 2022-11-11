@@ -1,34 +1,51 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    public float jumpSpeed = 5.0f;  // Á¡ÇÁ ¼Óµµ, ÈûÀ» °áÁ¤ÇÕ´Ï´Ù. 
-    public bool isGrounded = false; // boolÀº int, float¿Í °°ÀÌ º¯¼öÀÇ Æ¯Â¡ÀÎµ¥, true, false µÎ °¡Áö °ªÀ» Áö´Õ´Ï´Ù.
-    Rigidbody rgbd; //rigidbody ¼Ó¼ºÀ» »ç¿ëÇÒ ¿¹Á¤ÀÔ´Ï´Ù. Á¦°¡ ÀÓÀÇ·Î Á¤ÇÑ rgbd¶ó´Â ¸íÄªÀ¸·Î º¯¼ö¸¦ ¸¸µé¾ú½À´Ï´Ù.
+    public float jumpSpeed = 5.0f;
+    public bool isGrounded = false;
+    Rigidbody rgbd;
+    Animator animator; //ì• ë‹ˆë©”ì´í„°ë¥¼ ì‚¬ìš©í•˜ëŠ” ë³€ìˆ˜ë¥¼ ì¶”ê°€í•˜ì˜€ìŠµë‹ˆë‹¤.
 
+    public bool readyattack = true; //ê³µê²© ê°€ëŠ¥í•œ ìƒí™©ì—ë§Œ ê³µê²©í•˜ê²Œ í•©ë‹ˆë‹¤.
+    public float delay = 1.0f; //ê³µê²© ë”œë ˆì´ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
     void Start()
     {
-        rgbd = GetComponent<Rigidbody>(); //¾Æ±î ¸¸µç rgbdº¯¼ö¿¡ ÇöÀç °´Ã¼ÀÇ rigidbody¸¦ ºÒ·¯¿É´Ï´Ù       
+        rgbd = GetComponent<Rigidbody>();
+        this.animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter() // ¹°Ã¼°¡ Ãæµ¹ÇÏ¸é, ¾Æ·¡ ½ºÅ©¸³Æ®¸¦ ½ÇÇàÇÕ´Ï´Ù.
+    private void OnCollisionEnter(Collision collision)
     {
-        isGrounded = true;    //ÀÌ º¯¼ö´Â Á¡ÇÁ ÁØºñ°¡ ‰ç´Ù´Â Ç¥½Ã·Î »ç¿ëÇÏ¿´½À´Ï´Ù.
-        // ¶¥(¾Æ¹« ¹°Ã¼)¿¡ ´ê¾ÆÀÖÀ¸¸é È°¼ºÈ­ µË´Ï´Ù  
+        isGrounded = true;
+        this.animator.SetBool("isGround1", true); ï»¿//ì• ë‹ˆë©”ì´í„° íŒŒì¼ ë³€ìˆ˜ì—ì„œ ë•…ì— ìˆëŠ” ìƒí™©ì„ ì•Œë ¤ ì¤ë‹ˆë‹¤.
     }
 
     void Update()
     {
-        if (isGrounded) // isGrounded==true ¸¦ ÁÙÀÎ ¸»ÀÔ´Ï´Ù. ¶¥¿¡ ´ê¾ÆÀÖ´Â »óÅÂ¶ó¸é ¾Æ·¡ ½ºÅ©¸³Æ®¸¦ Çã¿ëÇÕ´Ï´Ù.
+        if (Input.GetButtonDown("Fire1") && readyattack) 
+            // &&ëŠ” ì–‘ì¸¡ ì¡°ê±´ì´ ëª¨ë‘ ë§Œì¡±ë  ë•Œ ì•„ë˜ ë‚´ìš©ì„ ì‹¤í–‰í•©ë‹ˆë‹¤. readyattack==trueì˜ë¯¸ì…ë‹ˆë‹¤.
         {
-            if (Input.GetKeyDown(KeyCode.Space)) // ½ºÆäÀÌ½º¸¦ ´©¸£¸é(down) ¾Æ·¡ ½ºÅ©¸³Æ®¸¦ ½ÇÇàÇÕ´Ï´Ù.
+            readyattack = false; //ê³µê²© í›„ ë°”ë¡œ ê³µê²©ì´ ì•ˆë˜ë„ë¡ í•©ë‹ˆë‹¤.
+            this.animator.SetTrigger("Attack1"); //ê³µê²© ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±° ì‹ í˜¸ë¥¼ ë³´ëƒ…ë‹ˆë‹¤.
+            StartCoroutine(Wait());  // ì•„ë˜ IEnumerator ë©”ì„œë“œë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤.
+        }
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
             {
+                this.animator.SetTrigger("Jumping"); ï»¿//ì í”„ ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰í•©ë‹ˆë‹¤.ï»¿
+                this.animator.SetBool("isGround1", false); ï»¿ï»¿//ê³µì¤‘ì— ìˆëŠ” ì¡°ê±´ìœ¼ë¡œ ë°”ê¿‰ë‹ˆë‹¤.
                 rgbd.AddForce(new Vector3(0, 1, 0) * jumpSpeed, ForceMode.Impulse);
-                // ¹°¸®ÀûÀ¸·Î ÈûÀ» °¡ÇÏ´Â addforce ¸í·ÉÀÔ´Ï´Ù. yÃàÀ¸·Î 1¸¸Å­ ÈûÀ» °¡ÇÏ°í, jumpspeed´Â ±× ¼Óµµ¸¦ °¡¼ÓÇÏ¸ç impulse´Â ÇÑ¹ø¿¡ °­ÇÑ ÈûÀ» ÁÖ´Â °ÍÀ» ÀÇ¹ÌÇÕ´Ï´Ù. 
-                isGrounded = false; //Á¡ÇÁ¸¦ ÇßÀ¸¸é ¹İº¹ ½ÇÇàÀ» ¸·±â À§ÇØ ¶¥¿¡¼­ ¶³¾îÁ³´Ù°í »óÅÂ¸¦ ¹Ù²ß´Ï´Ù.
+                isGrounded = false;
             }
         }
+    }
+    IEnumerator Wait()  //ì ê¹ ë”œë ˆì´ë¥¼ ì£¼ëŠ” ìš©ë„ì…ë‹ˆë‹¤. 
+    {
+        yield return new WaitForSeconds(delay);  //delayì— ìˆëŠ” ìˆ«ìë§Œí¼ì˜ ì´ˆë¥¼ ê¸°ë‹¤ë¦½ë‹ˆë‹¤
+        readyattack = true;  //ëª‡ì´ˆê°€ ì§€ë‚œ ë’¤ ë‹¤ì‹œ ê³µê²© ê°€ëŠ¥ìœ¼ë¡œ ë°”ê¿‰ë‹ˆë‹¤.
     }
 }
