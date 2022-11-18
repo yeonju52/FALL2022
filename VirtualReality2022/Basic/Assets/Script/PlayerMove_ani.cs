@@ -1,31 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerMove_ani : MonoBehaviour
-{
-    public int Speed = 2;
-    public float RotateX = 15.0f;
-    Animator animator; //¾Ö´Ï¸ŞÀÌÅÍ¸¦ »ç¿ëÇÏ´Â º¯¼ö¸¦ Ãß°¡ÇÏ¿´½À´Ï´Ù.
-
-    void Start()
-    {
-        this.animator = GetComponent<Animator>();
-        //½ÃÀÛ°ú µ¿½Ã¿¡ ÇØ´ç ¹°Ã¼¿¡¼­ µî·ÏµÈ ¾Ö´Ï¸ŞÀÌÅÍÄŞÆ÷³ÍÆ®¸¦ ºÒ·¯¿Í ¾Ö´Ï¸ŞÀÌÅÍ º¯¼ö¿¡ ³Ö½À´Ï´Ù.
-    }
-
-    void Update()
-    {
-        transform.Rotate(0, Input.GetAxis("Mouse X") * RotateX, 0);
-
-        float keyHorizontal = Input.GetAxis("Horizontal");
-        float keyVertical = Input.GetAxis("Vertical");
-
-        transform.Translate(Vector3.right * Speed * Time.smoothDeltaTime * keyHorizontal);
-        transform.Translate(Vector3.forward * Speed * Time.smoothDeltaTime * keyVertical);
-
-        this.animator.SetFloat("Xchuk", keyHorizontal);
-        this.animator.SetFloat("Zchuk", keyVertical);
-        //¾Ö´Ï¸ŞÀÌÅÍ ÆÄÀÏ ³» xÃà yÃà ½½¶óÀÌµå¸¦ Å°ÀÔ·Â°ú ¿¬µ¿ÇÕ´Ï´Ù.
+using System.Collections;â€©using System.Collections.Generic;â€©using UnityEngine;â€©â€©public class PlayerMove_ani : MonoBehaviourâ€©{â€©    public int Speed = 2;â€©    public float RotateX = 15.0f;â€©    Animator animator; //ì• ë‹ˆë©”ì´í„°ë¥¼ ì‚¬ìš©í•˜ëŠ” ë³€ìˆ˜ë¥¼ ì¶”ê°€í•˜ì˜€ìŠµë‹ˆë‹¤.â€©â€©    void Start()â€©    {â€©        this.animator = GetComponent<Animator>();
+        //ì‹œì‘ê³¼ ë™ì‹œì— í•´ë‹¹ ë¬¼ì²´ì—ì„œ ë“±ë¡ëœ ì• ë‹ˆë©”ì´í„°ì½¤í¬ë„ŒíŠ¸ë¥¼ ë¶ˆëŸ¬ì™€ ì• ë‹ˆë©”ì´í„° ë³€ìˆ˜ì— ë„£ìŠµë‹ˆë‹¤.
+    }â€©â€©    void Update()â€©    {â€©        transform.Rotate(0, Input.GetAxis("Mouse X") * RotateX, 0);â€©â€©        float keyHorizontal = Input.GetAxis("Horizontal");â€©        float keyVertical = Input.GetAxis("Vertical");â€©â€©        transform.Translate(Vector3.right * Speed * Time.smoothDeltaTime * keyHorizontal);â€©        transform.Translate(Vector3.forward * Speed * Time.smoothDeltaTime * keyVertical);â€©â€©        this.animator.SetFloat("axis_x", keyHorizontal);
+        this.animator.SetFloat("axis_y", keyVertical);
+        //ì• ë‹ˆë©”ì´í„° íŒŒì¼ ë‚´ xì¶• yì¶• ìŠ¬ë¼ì´ë“œë¥¼ í‚¤ì…ë ¥ê³¼ ì—°ë™í•©ë‹ˆë‹¤.
     }
 }
