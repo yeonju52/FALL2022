@@ -39,7 +39,7 @@ public class CameraFollow : MonoBehaviour
     private void LateUpdate()
     //바로바로 반응하는 것이 아닌, 위 행동을 한 후에 뒤따라 실행합니다. 부드러운 카메라 움직임이 나옵니다.
     {
-        Vector3 dir = new Vector3(0, 0, -distance); //거리를 벌려줍니다.
+        Vector3 dir = new Vector3(0, 2, -distance); //거리를 벌려줍니다.
         Quaternion rotation = Quaternion.Euler(Ynow * 2, Xnow * RotateX, 0);
         //회전값을 만듭니다. 상하는 2배, 좌우는 RotateX(캐릭터회전값)를 곱해주었습니다.
         camtrans.position = lookat.position + rotation * dir; //카메라를 위치를 지정해 줍니다.
