@@ -3,3 +3,5 @@
 
 - VirtualReality2022 (VR)
 - ComputerGraphics2022 (CG)
+  - Midterm
+    - Date: ~ 22.10.31
