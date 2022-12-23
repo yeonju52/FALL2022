@@ -1,0 +1,7 @@
+project - VR로
+[package manager]
+Oculus Integration 'All' import > update Oculus Utilities Plugin 'Yes' > OpneXR Backend 'Cancel' > Restart Unity 'Restart' > Interaction SDK 'Show Assets' & 'Clean up' > Update Spatializer Plugins 'Upgrade' > 'Restart' > Enable OculusXR Feature 'Enable'
+[project setting]
+XR Plug-in Management > 'Oculus' 에 체크
+오큘러스 pc앱 다운로드 ('C:\Program Files\Oculus')
+https://www.oculus.com/download_app/?id=1582076955407037

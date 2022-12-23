@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 5a4dab2871766cf4c8248ed96ca79942
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - NanumGothic Eco
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d9451b130dd255e49a09b6bbd8adf206, type: 3}
+  - {fileID: 12800000, guid: 5282a2d68836efb45a8325a797dca318, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
