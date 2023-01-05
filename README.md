@@ -9,3 +9,5 @@
   - Unity 2020.3.30f1
   - Midterm
     - Date: ~ 22.10.31
+
+ *(professor Hwang [Github](https://github.com/lectures202x/_L2022Q3_Unity_Graphics))*
